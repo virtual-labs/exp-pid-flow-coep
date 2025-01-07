@@ -213,15 +213,15 @@ function animateFlowSensor(){
 			
 			paper.rect((x+450),(y+200),270,135,5);
 			
-			paper.text((x + 550), (y +225), "Start up process : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
+			paper.text((x + 550), (y +225), "Start up phase : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
 			var stOn = paper.image("images/green.png", (x + 645), (y + 210), 40, 40);
 			var stOff = paper.image("images/red.png", (x +645), (y + 210), 40, 40);
 			
-			paper.text((x + 550), (y +265), "Running Process : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
+			paper.text((x + 550), (y +265), "Running phase : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
 			var rnOn = paper.image("images/green.png", (x + 645), (y + 250), 40, 40);
 			var rnOff = paper.image("images/red.png", (x +645), (y + 250), 40, 40);
 			
-			paper.text((x + 550), (y +305), "Shutdown Process : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
+			paper.text((x + 550), (y +305), "Shutdown phase : ").attr({ 'font-size': 17, 'font-weight': 'bold' });
 			var shOn = paper.image("images/green.png", (x + 645), (y + 290), 40, 40);
 			var shOff = paper.image("images/red.png", (x +645), (y + 290), 40, 40);
 			
