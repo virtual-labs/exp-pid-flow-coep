@@ -2,38 +2,69 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In your opinion why all the customer requirements could not be satisfied?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+         "a": "Poor Engineering of the project",
+        "b": "Lack of understanding of the requirements",
+        "c": "Scope is unclear",
+        "d": "Available infrastructure is inadequate"
+		
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
+      
+      "correctAnswer": "d",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Is the dynamic simulation of the process matches with the fullest extent of customer requirements?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Yes",
+        "b": "No"
+     
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+     
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which component of the plant will consume maximum energy?",
+      "answers": {
+        "a": "Pump",
+        "b": "Control system",
+        "c": "Field Instruments",
+        "d": "None from the list"
       },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+	{
+      "question": "Which method will be useful for reducing the energy consumption of the calibration facility?",
+      "answers": {
+        "a": "By reducing the number of cycles of the experiments",
+        "b": "By maximizing the number of  sensors to be calibrated simultaneously",
+        "c": "By re-designing the entire calibration facility",
+        "d": "None listed"
+      },
+     
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "Which part of the facility is wrongly designed",
+      "answers": {
+        "a": "Start-up sequence",
+        "b": "Running sequence",
+        "c": "Shut down sequence",
+        "d": "Not listed"
+      },
+     
       "correctAnswer": "c",
       "difficulty": "beginner"
     }
+  
+  
+  
+  
   ]
 }
