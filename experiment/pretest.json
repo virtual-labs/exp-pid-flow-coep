@@ -2,9 +2,9 @@
   "version": 2.0,
   "questions": [
     {
-      "question": " What is the definition of calibration",
+      "question": "What is the definition of calibration",
       "answers": {
-         "a": "Calibration is the process of configuring an instrument to provide a result for a sample within an acceptable range. ",
+         "a": "Calibration is the process of configuring an instrument to provide a result for a sample within an acceptable range.",
         "b": "Calibration is configuring and verifying a measuring instrument's accuracy to ensure its readings match a known standard",
         "c": "Calibration means comparing with standard device and adjusting it for accuracy within the limit",
         "d": "All"
@@ -16,8 +16,8 @@
     {
       "question": "What is traceability?",
       "answers": {
-        "a": "Traceability is the ability to identify and follow something or someone, or to keep track of information",
-        "b": "Traceability in calibration is the ability to link the readings of a measuring instrument to a known reference standard.",
+        "a": "Traceability is the ability to identify and follow something or someone, or to keep track of information",
+        "b": "Traceability in calibration is the ability to link the readings of a measuring instrument to a known reference standard.",
         "c": "Traceability means knowing and documenting the reference instrument used for calibration of device under test",
         "d": "All"
       },
