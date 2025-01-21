@@ -49,23 +49,32 @@ p.accordion.active:after {
 
 /* Style the element that is used for the panel class */
 
-div.panel {
-    padding: 0 5px;
-    background-color: #dadbdc;
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.4s ease-in-out;
-    opacity: 0;
-    margin-bottom:10px;
-    border-style: double;
-    border-radius: 16px;
-}
+#simDemo,#nextLevel1,#verifyComponents,#verifyInstr,#nextLevel2,#verifyButton,#startBtn,#fillTankBtn,#datasheetBtn,#reset,#datasheet,#graph,#procedure,#btnResult,#generatePdf{
+    border-color: teal;
+    background-color: teal;
 
-div.panel.show {
-   
-        opacity: 1;
-    max-height:  fit-content; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
 }
+.timerStyle{
+	    background-color: #343a40;
+    color: #fff;
+    
+	
+}
+ .panel {
+      border: 2px solid #000;
+      padding: 20px;
+      border-radius: 8px;
+      width: fit-content;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .radio-label {
+      margin-right: 20px;
+    }
+    #selectedTime {
+      margin-top: 20px;
+      font-weight: bold;
+    }
 .imgClass{
 	padding:3px;
 	margin:5px 1px 5px 2px;
@@ -325,7 +334,7 @@ background: linear-gradient(90deg, rgba(125,176,169,1) 0%, rgba(78,109,114,1) 31
 	font-size:20px;color:green;
 }
 .modal-header{
-background-color: cadetblue;
+background-color: #343a40;
     color: #fff;
 }
 .PMCValue{
@@ -341,4 +350,10 @@ background-color: cadetblue;
 	    font-size: 10px;
 	    margin-left:5px;
     font-family: inherit;
+}
+#simDemo,#nextLevel1,#verifyComponents,#verifyInstr,#nextLevel2,#verifyButton,#startBtn,#reset,#datasheetBtn,#graph,#procedure,#btnResult,#fillTankBtn.#generatePdf{
+    border-color: teal;
+    background-color: teal;
+    margin-bottom:5px;
+
 }
