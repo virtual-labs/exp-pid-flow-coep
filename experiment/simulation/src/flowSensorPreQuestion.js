@@ -1,8 +1,56 @@
+var seqCount=0;
 function flowSensorPreQuestion()
 {
-	$("#Selection").html("");
+//      timerMasterJson.instr=$("#counter").text();
+//		console.log(timerMasterJson);
+//		seconds = 0;
+//		  updateCounter();
+	var htm=''
+		 +'<div class="row justify-content-center" style="margin:5px;background-color:#343a40;margin: 5px; padding: 10px;">'
+//  <div class="col-sm-4">
+//    +'  <h2 class="text-center mb-3">Project Initiation</h2>'
+//    +'   <p class="text-center">Understanding the Requirements</p>'
+//    +'    <p class="text-muted small" style="color:#fff;">'
+//    +'      Before embarking on a project, it is essential to gather key information to ensure success. Below are the activities arranged by phases:'
+//    +'  </p>'
+
+//      <!-- Pre-Engineering Phase -->
+    +'    <div class="phase-title"></div>'
+    +'    <ul class="list-group activity-list" style="background-color: #848587;">'
+    +'     <li class="list-group-item"><b>1.Prior Knowledge Assessment : </b>Identify which sensors are to be tested.</li>'
+    +'      <li class="list-group-item"><b>2.Standard Identification : </b>Determine which standard is to be followed.</li>'
+    +'       <li class="list-group-item"><b>3.Sensor Range Definition : </b>Define the range of the sensor.</li>'
+   
+    +'   </ul>'
+
+//      <!-- Post-Engineering Phase -->
+    +'  <div class="phase-title"></div>'
+    +'  <ul class="list-group activity-list" style="background-color: #848587;">'
+    +'       <li class="list-group-item"><b>4.Accuracy Testing : </b>Identify what accuracies are to be tested.</li>'
+    +'       <li class="list-group-item"><b>5.Project Scope Definition : </b> Define the scope of the project.</li>'
+    +'       <li class="list-group-item"><b>6.Project Type Definition : </b> Determine if the project is green field or modernization.</li>'
+    +'       <li class="list-group-item"><b>7.Test Capacity Determination : </b>Determine the test capacity of the lab in one shift.</li>'
+   
+    +'   </ul>'
+
+//      <!-- Maintenance Requirements Phase -->
+    +'    <div class="phase-title"></div>'
+    +'   <ul class="list-group activity-list" style="background-color: #848587;">'
+    +'      <li class="list-group-item"><b>8.Constraint Identification : </b>Identify constraints (space, technology, automation, finances).</li>'
+    +'      <li class="list-group-item"><b>9.Project Timeline Definition : </b>Determine the project timeline.</li>'
+    +'      <li class="list-group-item"><b>10.Budget Allocation : </b>Establish the project budget.</li>'
+    +'      <li class="list-group-item"><b>11.Resource Assessment : </b>Assess current workloads and team size.</li>'
+    +'  </ul>'
+//  </div>
++'</div>'
+
+	$("#Selection").html(htm);
 	$("#Header").html("	<center><span>SEQUENCE OF ACTIVITIES</span></center>");
-	htm=''
+	var htm=''
+  +'<div class="col-sm-12 note" id="">'
+	+'<b style="font-size:18px;color:#f6f685;">NOTE - </b><span>You are required to arrange these activities as per the phase of the project like pre-engineering, post- Engineering,'
+	+'and Maintenance requirements of the project. These are 11 activities and you will have to number them in a chronological sequence. </span>'
+	+'</div>'
 	+'<table>'
 	+'<thead>'
 	+'<tr>'
@@ -36,9 +84,8 @@ function flowSensorPreQuestion()
 +'		  </div>'
 +'<!-- 			  End Modal ProStr -->'
 	$("#diagram").html(htm);
-	// Shuffle function
-	// Initialize variables
-	// Initialize variables
+//Shuffle function
+	
 	var attempts = 0;
 	const maxAttempts = 4;
 	var totalAccuracy = 0;
@@ -47,11 +94,11 @@ function flowSensorPreQuestion()
 	    // Shuffle the groups
 		
 		function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+          for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+          }
+      }
 		
 	    shuffleArray(jsonData.groups);
 
@@ -62,7 +109,7 @@ function flowSensorPreQuestion()
 	                <tr>
 	                    <td>${statement.statement}</td>
 	                    <td>
-	                        <input type="number" class="input-box" data-min="${group.min}" data-max="${group.max}" placeholder="Enter step number">
+	                        <input type="number" class="input-box" data-min="${group.min}" data-max="${group.max}" placeholder="">
 	                    </td>
 	                </tr>
 	            `;
@@ -96,12 +143,16 @@ function flowSensorPreQuestion()
 	        let maxLimit = 11;
 
 	        // Check if the input is a number
-	        if (!/^\d+$/.test(enteredValue)) {
-	            toastr.danger("Please enter a valid numerical value.");
+	        if (!/^\d+$/.test(enteredValue) || enteredValue.trim() === "") {
+	            if (enteredValue.trim() === "") {
+	                toastr.error("This field cannot be empty. Please enter a valid numerical value.");
+	            } else {
+	                toastr.error("Please enter a valid numerical value.");
+	            }
 	            $(this).val(''); // Clear invalid input
 	            return;
+	            
 	        }
-
 	        // Validate range
 	        if (enteredValue < minLimit || enteredValue > maxLimit) {
 	            toastr.warning(`Please enter a value between ${minLimit} and ${maxLimit}.`);
@@ -122,6 +173,7 @@ function flowSensorPreQuestion()
 
 	    // Verify button logic
 	    $('#verifyButton').click(function () {
+	    	seqCount++;
 	        if (attempts >= maxAttempts) {
 	            showModal("No attempts remaining.");
 	            return;
@@ -147,16 +199,23 @@ function flowSensorPreQuestion()
 	        let remainingAttempts = maxAttempts - attempts;
 
 	        if (attempts === maxAttempts || averageAccuracy === '100.00') {
-	            flowSensorMimic();
+	        	$("#diagram").html("");
+	        	flowSensorMimic();
 	            $('.input-box').prop('disabled', true);
+	            resultJson.seqActivites=seqCount;
+	            console.log(resultJson);
 	        }
 
 	        showModal(`
-	            <strong>Correctness:</strong> ${averageAccuracy}%<br>
-	            <strong>Remaining Attempts:</strong> ${remainingAttempts}
+	        		<strong style="color:#153f68;font-size: large;">Extent of correct sequence : </strong> <b style="color:red">${averageAccuracy}% </b><br>
+	            <strong style="color:#153f68;font-size: large;">You still have <b style="color:red;">${remainingAttempts}</b> attempts to identify correctly.</strong>
 	        `);
+	       
 	    });
 	});
 
 
+
+
 }
+

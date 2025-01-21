@@ -50,21 +50,21 @@ function flowSensorInstrument()
 		+'</div>'
 		+'<div class="col-sm-12">'
 		+'<label><b>Select no of Weight transmitter (WT)</b></label>'
-		+' <input class="form-select" id="wt"  type="number" min="0" max="5" value="0" tabindex="3" ></input>'
+		+' <input class="form-select" id="wt"  type="number" min="0" max="5" value="0" tabindex="4" ></input>'
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
 		+'<label><b>Select no of variable frequency drive (VFD)</b></label>'
-		+' <input class="form-select" id="vfd" type="number" min="0" max="5" value="0" tabindex="4"></input>'
+		+' <input class="form-select" id="vfd" type="number" min="0" max="5" value="0" tabindex="5"></input>'
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
 		+'<label><b>Select no of  I/P</b></label>'
-		+' <input class="form-select" id="ip" type="number" min="0" max="5" value="0" tabindex="2"></input>'
+		+' <input class="form-select" id="ip" type="number" min="0" max="5" value="0" tabindex="6"></input>'
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="verifyInstr" style="margin-top:10px;width:100%" data-toggle="modal" data-target="#myModal1" tabindex="12">Verify Instruments </button>'
+		+'<button type="button" class="btn btn-danger"  id="verifyInstr" style="margin-top:10px;width:100%" data-toggle="modal" data-target="#myModal1" tabindex="7">Verify Instruments </button>'
 		
 //		+'	  <!-- The Modal -->'
 		+'  <div class="modal fade " id="myModal1">'
@@ -89,7 +89,7 @@ function flowSensorInstrument()
 //		+'	  <!-- End Modal -->'
 		+'</div>'
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="nextLevel2" style="margin-top:10px;margin-bottom:10px;width:100%" tabindex="13" hidden>Next level</button>'
+		+'<button type="button" class="btn btn-danger"  id="nextLevel2" style="margin-top:10px;margin-bottom:10px;width:100%" tabindex="8" hidden>Next level</button>'
 		+'</div>'
 		
 		+'</div>'
