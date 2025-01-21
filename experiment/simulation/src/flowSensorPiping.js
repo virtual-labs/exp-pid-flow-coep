@@ -1,5 +1,6 @@
 ComponentMasterJson = {};
-
+timerMasterJson = {};
+resultJson={};
 function flowSensorPiping()
 {
 	var StdCompInstruCount=5;
@@ -37,13 +38,13 @@ var pump;
 	
 		+'<div class="col-sm-12">'
 		+'<label><b>Select no of Valves</b></label>'
-		+' <input class="form-select" id="valves"  type="number" min="0" max="5" value="0" tabindex="4" ></input>'
+		+' <input class="form-select" id="valves"  type="number" min="0" max="5" value="0" tabindex="3" ></input>'
 		+'</div>'
 		
 		
 		+'<div class="col-sm-12">'
 		+'<label><b>Utilities</b></label>'
-		+'<select class="form-select" id="Utilities" multiple="multiple" tabindex="6">'
+		+'<select class="form-select" id="Utilities" multiple="multiple" tabindex="4">'
 		+'  <option value="Water">Water</option>'
 		+'  <option value="Air">Air</option>'
 		+'  <option value="Steam">Steam </option>'
@@ -58,7 +59,7 @@ var pump;
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="verifyComponents" style="margin-top:10px;margin-bottom:10px;width:100%" data-toggle="modal" data-target="#myModal" tabindex="7">Verify Components </button>'
+		+'<button type="button" class="btn btn-danger"  id="verifyComponents" style="margin-top:10px;margin-bottom:10px;width:100%" data-toggle="modal" data-target="#myModal" tabindex="5">Verify Components </button>'
 		
 //		+'	  <!-- The Modal -->'
 		+'  <div class="modal fade " id="myModal">'
@@ -83,7 +84,7 @@ var pump;
 //		+'	  <!-- End Modal -->'
 		+'</div>'
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="nextLevel1" style="margin-top:10px;margin-bottom:10px;width:100%" hidden>Next Level</button>'
+		+'<button type="button" class="btn btn-danger"  id="nextLevel1" style="margin-top:10px;margin-bottom:10px;width:100%" tabindex="6" hidden>Next Level</button>'
 		+'</div>'
 		
 		+'</div>'
@@ -253,7 +254,7 @@ var pump;
 							+'</div>'
 							+'</div>'
 
-						+"<img src='images/FlowSensor.jpg' class='img-fluid' style='border-style: double;border-color: black;'>"
+						+"<img src='images/flowSensor.png' class='img-fluid' style='border-style: double;border-color: black;'>"
 					  
 						 $("#modelBody").html(htm);
 						  $("#modelBody").css("color","red");   
@@ -305,14 +306,14 @@ var pump;
 					addToMasterJson();
 					htm=''
 						+'<div class="col-sm-12" >'
-						+"<img src='images/FlowSensor.jpg' class='img-fluid' id='partA1' style=' width: 100px;height:100px;position: relative; margin: 20px;'  >"
+						+"<img src='images/flowSensor.png' class='img-fluid' id='partA1' style=' width: 100px;height:100px;position: relative; margin: 20px;'  >"
 						+'</div>'
 						
 					$("#diagram").html(htm);
 					 $("#partA1").animate(
 					          {
 					            width: "80%",
-					            height: "100%",
+					            height: "90%",
 					           left: "+=50px",
 		//			            background-color:"red"
 					            

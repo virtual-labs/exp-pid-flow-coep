@@ -1,22 +1,44 @@
+var selectedValue;
+var dataArr = [];
 function flowSensorMimic(){
 	
 	
-	$("#Header").html("	<center><span >MIMIC</span></center>");
+	$("#Header").html("	<center><span >SIMULATION</span></center>");
 	$("#diagram").html("");
 	
 	htm=''
 		+'<div class="row titlePart"  style="border-style: unset;padding:7px;">'
 		+'<center><span >PROCESS MONITORING PANEL</span></center>'
 		+'</div>'
+	+'<div class="row">'
+	 +' <div class="panel">'
+	 +' <h5>Run Mode</h5>'
+	 +' <div class="form-check form-check-inline">'
+	 +'   <input class="form-check-input" type="radio" name="Mode" id="runModeCV" value="cv">'
+	 +'   <label class="form-check-label radio-label" for="twoMinutes">Control Valve</label>'
+	 +'  </div>'
+  +'  <div class="form-check form-check-inline">'
+  +'    <input class="form-check-input" type="radio" name="Mode" id="runModeM1" value="m1">'
+  +'    <label class="form-check-label radio-label" for="threeMinutes">Motor</label>'
+  +'  </div>'
+
+//  +'	  <div id="selectedTime">Selected Time: None</div>'
+  +'	</div>'
+	+'</div>'
 		+'<div class="row">'
-		+'<div class="col-sm-3">'
-		+'<button id="fillTankBtn" class="btn btn-danger" style="width:100%" data-toggle="modal" data-target="#myModal1">FILL TANK</button>'
-		+'</div>'
-		+'<div class="col-sm-3">'
-		+'<button id="startBtn" class="btn btn-danger" style="width:100%" disabled>START</button>'
+		+'<div class="col-sm-6">'
+		+'<button id="fillTankBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#myModal1" disabled>Fill Tank</button>'
 		+'</div>'
 		+'<div class="col-sm-6">'
-		+'<button id="datasheetBtn" class="btn btn-danger" style="width:100%" data-toggle="modal" data-target="#datasheetModel" disabled>VIEW DATASHEET</button>'
+		+'<button id="startBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" disabled>Start</button>'
+		+'</div>'
+		+'</div>'
+		+'<div class="row">'
+		+'<div class="col-sm-6">'
+		+'<button id="datasheetBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#datasheetModel" disabled>View Datasheet</button>'
+		+'</div>'
+		+'<div class="col-sm-6">'
+		+'<button type="button" class="btn btn-danger"  id="graph" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#modalTrends1" disabled>Trends </button>'
 		+'</div>'
 		+'</div>'
 		+'<div class="row titlePart"  style="border-style: unset;padding:7px;">'
@@ -67,51 +89,127 @@ function flowSensorMimic(){
 		+'  </tr>'
 		+'  <tr>'
 		+' <td><label><b>Load Cell (WT) :</b></label></td>'
-		+' <td><label class="PMCValue" id="lcWtVal1">0</label>Kg</td>'
+		+' <td><label class="PMCValue" id="lcWtVal1">240</label>Kg</td>'
 		+'  </tr>'
 		+'</tbody>'
 		+'</table>'
 
 		+'</div>'
+		
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="flowSensorNextLvlBtn" style="margin-top:10px;width:100%" disabled>Next level </button>'
+		+'<button type="button" class="btn btn-danger"  id="btnResult" style="margin-top:10px;width:100%" disabled>Result</button>'
+		+'</div>'
+		
 		+'<div class="modal fade " id="datasheetModel">'
 		+'<div class="modal-dialog modal-xl" >'
 		+'<div class="modal-content">'
 		+'<div class="modal-header">'
-		+'<h4 class="modal-title"><center>Sensor Datasheet</center></h4>'
+		+'<h4 class="modal-title"><center>Datasheet</center></h4>'
 		+'<button type="button" class="close" data-dismiss="modal">&times;</button>'
 		+'</div>'
-		+'<div class="modal-body" id="proStrBody">'
+		+'<div class="modal-body" id="datasheetBody">'
 		+'</div>'
 		+'<div class="modal-footer">'
-		+'<button type="button" class="btn btn-danger" data-dismiss="modal" >Ok</button>'
+//		+'<button type="button" class="btn btn-danger" data-dismiss="modal" >OK</button>'
 		+'</div>'
 		+'</div>'
 		+'</div>'
 		+'</div>'
+		
+		+'<div class="modal fade " id="modalTrends1">'
+		+'<div class="modal-dialog modal-xl" >'
+		+'<div class="modal-content">'
+		+'<div class="modal-header">'
+		+'<h4 class="modal-title"><center>Graph</center></h4>'
+		+'<button type="button" class="close" data-dismiss="modal">&times;</button>'
+		+'</div>'
+		+'<div class="modal-body" id="trends1">'
+		+'</div>'
+		+'<div class="modal-footer">'
+//		+'<button type="button" class="btn btn-danger" data-dismiss="modal" >OK</button>'
+		+'</div>'
+		+'</div>'
+		+'</div>'
+		+'</div>'
+		
+		
+//		+'<div class="modal fade " id="modalTrends">'
+//		+'<div class="modal-dialog modal-xl" >'
+//		+'<div class="modal-content">'
+//		+'<div class="modal-header">'
+//		+'<h4 class="modal-title"><center></center></h4>'
+//		+'<button type="button" class="close" data-dismiss="modal">&times;</button>'
+//		+'</div>'
+//		+'<div class="modal-body" id="bodyTrends">'
+//		+'</div>'
+//		+'<div class="modal-footer">'
+////		+'       <button type="button" class="btn btn-danger"  id="download" style="margin-top:10px;float: right;" >Download </button>'
+//	
+////		+'<button type="button" class="btn btn-danger" data-dismiss="modal" >Ok</button>'
+//		+'</div>'
+//		+'</div>'
+//		+'</div>'
+//		+'</div>'
 	$("#Selection").html(htm);
+	 const radioButtons = document.querySelectorAll('input[name="Mode"]');
+//	  const selectedTimeDiv = document.getElementById('selectedTime');
+	  
+	radioButtons.forEach(radio => {
+	    radio.addEventListener('change', () => {
+//	      selectedTimeDiv.textContent = `Selected Time: ${radio.value}`;
+//	      console.log(${radio.value});
+	    	$("#fillTankBtn").prop("disabled",false);
+	    	selectedValue = $('input[name="Mode"]:checked').val();
+	      console.log("on change event "+selectedValue);
+//	      time = selectedValue;
+	      runMode = selectedValue;
+//			 console.log(" start time "+time);
+			 console.log("selectedValue after start "+selectedValue);
+//	      $('#selectedTime').text(`Selected Time: ${selectedValue}`);
+	     
+	    });
+	  });
 	 animateFlowSensor();
 	
-	$("#flowSensorNextLvlBtn").click(function(){
+	$("#btnResult").click(function(){
 		
-		flowSensorPostQuestion();
+//		flowSensorPostQuestion();
+		
+	});
+	$("#graph").click(function(){
+		console.log("graph call");
+		graphTabs();
 		
 	});
 	
 	$("#datasheetBtn").on("click", function(){
-		var htm = '';
+//		var htm = ''
+//		
+//		htm += 'Hello'
+//			+ dataArr
+//		
+//		$("#proStrBody").html(htm);
+//		console.log(dataArr);
+		Datasheet();
+	});
+	$('#download').on('click', function() {
 		
-		htm += 'Hello'
-			+ dataArr
-		
-		$(".modal-body").html(htm);
-		console.log(dataArr);
-	})
+//		$('#saveAsJpg').prop("hidden",true);
+	    html2canvas(document.querySelector("#bodyTrends")).then(canvas => {
+	        // Append the screenshot canvas to the body
+	        document.body.appendChild(canvas);
+	        $("canvas").css("display","none");
+	        // Optionally save the screenshot as an image
+	        var link = document.createElement('a');
+	        link.download = 'FlowSensorGraph.png';
+	        link.href = canvas.toDataURL();
+	        link.click();
+	    });
+	});
 }
 
-var dataArr = [];
 
+var runMode = selectedValue;
 function animateFlowSensor(){
 			
 	var data = {};
@@ -135,7 +233,7 @@ function animateFlowSensor(){
 			}
 
 			paper.clear();
-			var time = 500;
+			var time = 2000;
 			var htb = -110;
 		    var htb1 = 110;
 		    var htt = -110;
@@ -149,7 +247,7 @@ function animateFlowSensor(){
 		   
 		    
 //		    var runMode = "m1";
-		    var runMode = "cv";
+		    runMode = selectedValue;
 		    var loadCell = 1200;
 		    var wt = loadCell/20;
 		    var tankWt = 0;
@@ -386,7 +484,7 @@ function animateFlowSensor(){
 						dataArr.push(data);
 						console.log(dataArr);
 						
-						$("#datasheetBtn").prop("disabled", false);
+						$("#datasheetBtn,#graph").prop("disabled", false);
 					}
 				}, time/4);
 			}
@@ -433,7 +531,7 @@ function animateFlowSensor(){
 			
 			function tank_emptyb(x, y) {
 				$("#startBtn").prop("disabled", true);
-				$("#datasheetBtn").prop("disabled", true);
+				$("#datasheetBtn,#graph").prop("disabled", true);
 				var b = paper.path('M' + (x) + ' ' + (y) + 'l 0 0').attr({ 'stroke': emptyColor, 'stroke-width': '128' });
 				level = b.animate({
 					path: "M" + (x) + " " + (y) + "  l 0  " + (htb1) + "", 'stroke-width': '128', 'stroke': emptyColor,
@@ -556,6 +654,7 @@ function animateFlowSensor(){
 //			TODO: fill tank button
 //		    click event listener for fill tank button
 		    document.getElementById("fillTankBtn").addEventListener("click", function () {
+		    	$("#runModeM1,#unModeCV").prop("disabled", true);
 					stOn.toFront();
 					tank_fillb((x+1005),(y+570));
 					$("#fillTankBtn").prop("disabled", true);

@@ -7,6 +7,14 @@
             border: 1px solid #ddd;
             text-align: left;
             padding: 8px;
+           
+	    border: 1px solid #ddd;
+	    text-align: left;
+	    padding: 8px;
+	    color: #5b5e63;
+	    font-size: 17px;
+	    font-weight: 700;
+
         }
         th {
             background-color: #f4f4f4;
