@@ -45,7 +45,7 @@ var pump;
 		+'<div class="col-sm-12">'
 		+'<label><b>Utilities</b></label>'
 		+'<select class="form-select" id="Utilities" multiple="multiple" tabindex="4">'
-		+'  <option value="Water">Water</option>'
+		+'  <option value="Water" >Water</option>'
 		+'  <option value="Air">Air</option>'
 		+'  <option value="Steam">Steam </option>'
 		+'  <option value="Electricity">Electricity</option>'

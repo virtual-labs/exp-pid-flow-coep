@@ -152,21 +152,12 @@ function flowSensorMimic(){
 //		+'</div>'
 	$("#Selection").html(htm);
 	 const radioButtons = document.querySelectorAll('input[name="Mode"]');
-//	  const selectedTimeDiv = document.getElementById('selectedTime');
 	  
 	radioButtons.forEach(radio => {
 	    radio.addEventListener('change', () => {
-//	      selectedTimeDiv.textContent = `Selected Time: ${radio.value}`;
-//	      console.log(${radio.value});
 	    	$("#fillTankBtn").prop("disabled",false);
 	    	selectedValue = $('input[name="Mode"]:checked').val();
-	      console.log("on change event "+selectedValue);
-//	      time = selectedValue;
 	      runMode = selectedValue;
-//			 console.log(" start time "+time);
-			 console.log("selectedValue after start "+selectedValue);
-//	      $('#selectedTime').text(`Selected Time: ${selectedValue}`);
-	     
 	    });
 	  });
 	 animateFlowSensor();
@@ -183,13 +174,6 @@ function flowSensorMimic(){
 	});
 	
 	$("#datasheetBtn").on("click", function(){
-//		var htm = ''
-//		
-//		htm += 'Hello'
-//			+ dataArr
-//		
-//		$("#proStrBody").html(htm);
-//		console.log(dataArr);
 		Datasheet();
 	});
 	$('#download').on('click', function() {
@@ -208,6 +192,7 @@ function flowSensorMimic(){
 	});
 }
 
+//TODO animation starts here
 
 var runMode = selectedValue;
 function animateFlowSensor(){
@@ -232,18 +217,20 @@ function animateFlowSensor(){
 				paper.setSize('90%', '100%');
 			}
 
-			paper.clear();
-			var time = 2000;
-			var htb = -110;
-		    var htb1 = 110;
-		    var htt = -110;
-		    var htt1 = 110;
-		    var ptb = 20;
-			var ptt = 20;
-			var initFlg = false;
-		    var color = '#a8f2f7';
-		    var emptyColor = "#fff";
-		    var txtColor = "#00cc88";
+		paper.clear();
+		var time = 1500;
+		var htb = -110;
+		var htb1 = 110;
+		var htt = -110;
+		var htt1 = 110;
+		var ptb = 20;
+		var ptt = 20;
+		var initFlg = false;
+		var color = '#a8f2f7';
+		var emptyColor = "#fff";
+		var txtColor = "#00cc88";
+		var expCompleteFlg = false;
+		var strtBtnFlg = false;
 		   
 		    
 //		    var runMode = "m1";
@@ -355,7 +342,7 @@ function animateFlowSensor(){
 			var offBtn = paper.image("images/circle_red.png", (x + 816), (y + 553), 30, 30);
 			
 			paper.text((x+1105), (y+615), "Drain Valve").attr({'font-size':15,'font-weight':'bold'});
-		    var rvalve_drain = paper.image("images/svValveV1R.png", (x + 1030), (y + 589), 40, 40); //feed tank drain valve
+		    paper.image("images/svValveV1R.png", (x + 1030), (y + 589), 40, 40); //feed tank drain valve
 			
 			paper.text((x+1040), (y+295), "SV").attr({'font-size':15,'font-weight':'bold'});
 		    var gvalve_sv1 = paper.image("images/svValveV2G.png", (x + 976), (y + 280), 100, 80);   //tank connector vertical valve
@@ -442,10 +429,12 @@ function animateFlowSensor(){
 				a[3].animate({ path: "M" + (x + 1005) + " " + (y + 589) + " l 0 -20" }, (200), function() {})
 			}
 			
-			var cntbLbl = paper.text((x + 980), (y + 535), 20).attr({ 'font-size': 15, 'font-weight': 'bold' });
+//			var cntbLbl = paper.text((x + 980), (y + 535), 20).attr({ 'font-size': 15, 'font-weight': 'bold' });
 
-			var cnttLbl = paper.text((x + 980), (y + 185), 20).attr({ 'font-size': 15, 'font-weight': 'bold' });
+//			var cnttLbl = paper.text((x + 980), (y + 185), 20).attr({ 'font-size': 15, 'font-weight': 'bold' });
 			s = [];
+			
+//			 Drain top tank
 			function emptyTopTankToBottom(x, y) { 
 				resetMeterToZero();
 				r[0].hide();
@@ -453,40 +442,106 @@ function animateFlowSensor(){
 				r[2].hide();
 				r[3].hide();
 				gvalve_sv1.toFront();
-
+				offBtn.toFront();
+				
 				s[0] = paper.path("M" + (x ) + " " + (y+137) + " l 0 0").attr({ 'stroke': color, 'stroke-width': '15'})
 					s[0].animate({ path: "M" + (x) + " " + (y+137) + " l 0 213"}, (time), function() {
 						decrementLoadCell();
 						tank_emptyt((x),(y-110));
-						tank_fillb((x),(y+350));	
+						tank_fillb((x),(y+350));
+						
+
 						
 					});
 			}
 			
+//			Code for reverse counter of valve or motor for down trend of sensors start			
+			function startReverseAnimationForMaxToMinFlow(){
+				
+				if(expCompleteFlg == false){				
+					expCompleteFlg = true;
+	
+					setTimeout(()=>{
+						
+	//					stOff.toFront();
+	//					rnOn.toFront();
+						loadcellVal.attr('text', "0");
+						toastr.success("Tare weight reset to 0");
+						 setTimeout(() => {
+							r = [];
+							r[0] = paper.path("M" + (x + 940) + " " + (y + 578) + " l 0 0").attr({ 'stroke': color, 'stroke-width': '15'})
+								motor_img.toFront();
+								onBtn.toFront();
+								valve_cv.toFront();
+								orifice.toFront();
+								venture.toFront();
+							r[0].animate({ path: "M" + (x + 940) + " " + (y + 578) + " l -912 0"}, (time), function() {
+								tank_emptyRevb((x+1005),(y+460));
+								r[1] = paper.path("M" + (x + 35) + " " + (y + 580) + " l 0 0").attr({ 'stroke': color, 'stroke-width': '15'})
+								r[1].animate({ path: "M" + (x + 35) + " " + (y + 582) + " l 0 -560"}, (time), function() {
+									r[2] = paper.path("M" + (x + 30) + " " + (y + 28) + " l 0 0").attr({ 'stroke': color, 'stroke-width': '15'})
+									pitot.toFront();
+									magnetic.toFront();
+									ultrasonic.toFront();
+									turbine.toFront();
+									r[2].animate({ path: "M" + (x + 30) + " " + (y + 28) + " l 983 0"}, (time), function() {
+										r[3] = paper.path("M" + (x + 1005) + " " + (y + 28) + " l 0 0").attr({ 'stroke': color, 'stroke-width': '15'})
+										r[3].animate({ path: "M" + (x + 1005) + " " + (y + 28) + " l 0 200"}, (time), function() {
+											tank_fillRevt((x+1005),(y+220));
+										
+										})
+									})
+								})
+							})
+								
+							setTimeout(() => {
+								valueIteratorRev();
+							}, time);
+						}, time);
+						
+						tareOn.toFront();
+					}, 5000)
+				}
+			} 
+			
+//			TODO decrement load cell function
 			function decrementLoadCell(){
+					
 					ptDec = 1;
 					var ptd1_interval = setInterval(function() {
-					if ( ptt > 0 && !(tankWt <= 0)) {
+					if ( ptt > 0 && !(tankWt < 0)) {
 						if(ptt % 5 == 0){
-							tankWt = tankWt - wt; 
 							loadcellVal.attr('text', tankWt);
 							$("#lcWtVal1").text(tankWt);
-							dataArrDownwt.push(tankWt);
-							data.downWt = dataArrDownwt;
+							
+							if(expCompleteFlg == false){
+								dataArrDownwt.push(tankWt);
+								data.downWt = dataArrDownwt;
+							}
+							tankWt = tankWt - wt; 
 						}
 					}else{
 						clearInterval(ptd1_interval);
-						shOff.toFront();
-						$("#flowSensorNextLvlBtn").prop("disabled", false);
 						tareOff.toFront();
-						data.upwt = dataArrUpwt; 
-						data.sensor = dataArrUp;
-						dataArr.push(data);
-						console.log(dataArr);
 						
-						$("#datasheetBtn,#graph").prop("disabled", false);
+						if(expCompleteFlg == true){
+							data.upwt = dataArrUpwt; 
+							data.sensor = dataArrUp;
+							dataArr.push(data);	
+							console.log(dataArr);
+						}
+						
+						if(expCompleteFlg == true){
+							rnOff.toFront();
+							shOff.toFront();
+							$("#startBtn").prop("disabled", false);
+							$("#flowSensorNextLvlBtn").prop("disabled", false);
+							$("#datasheetBtn,#graph").prop("disabled", false);
+						}
+						
+						startReverseAnimationForMaxToMinFlow(expCompleteFlg);
 					}
-				}, time/4);
+				}, time/5);
 			}
 			
 			function tank_fillb(x, y) { 
@@ -516,22 +571,21 @@ function animateFlowSensor(){
 							lhbrStrip.toFront();
 						}
 						ptb = ptb + intFact;
-						cntbLbl.attr('text', Math.round(ptb));
-						cntbLbl.toFront();
+//						cntbLbl.attr('text', Math.round(ptb));
+//						cntbLbl.toFront();
 					} else {
 						clearInterval(pinterval);
 						inletR.show().toFront();
-						stOff.toFront();
-						$("#startBtn").prop("disabled", false);
-//						$("#datasheetBtn").prop("disabled", false);
+						if(strtBtnFlg == false){
+							$("#startBtn").prop("disabled", false);
+							strtBtnFlg = true;
+						}
 					}
 				}, time/4);
 			};
 			
 			
 			function tank_emptyb(x, y) {
-				$("#startBtn").prop("disabled", true);
-				$("#datasheetBtn,#graph").prop("disabled", true);
 				var b = paper.path('M' + (x) + ' ' + (y) + 'l 0 0').attr({ 'stroke': emptyColor, 'stroke-width': '128' });
 				level = b.animate({
 					path: "M" + (x) + " " + (y) + "  l 0  " + (htb1) + "", 'stroke-width': '128', 'stroke': emptyColor,
@@ -545,20 +599,51 @@ function animateFlowSensor(){
 					if ( ptb > 20) {
 						if(ptb== 25){
 							llbrStrip.toFront();
-							offBtn.toFront();
+//							offBtn.toFront();
 						}
 						if(ptb == 80){
 							lhbgStrip.toFront();
 						}
 						ptb = ptb - ptDec;
-						cntbLbl.attr('text', Math.round(ptb));
-						cntbLbl.toFront();
+//						cntbLbl.attr('text', Math.round(ptb));
+//						cntbLbl.toFront();
+					}else{
+						clearInterval(ptd_interval3);
+					}
+				}, time/3.5);
+			};
+				
+			function tank_emptyRevb(x, y) {
+//				$("#startBtn").prop("disabled", true);
+//				$("#datasheetBtn,#graph").prop("disabled", true);
+				var b = paper.path('M' + (x) + ' ' + (y) + 'l 0 0').attr({ 'stroke': emptyColor, 'stroke-width': '128' });
+				level = b.animate({
+					path: "M" + (x) + " " + (y) + "  l 0  " + (htb1) + "", 'stroke-width': '128', 'stroke': emptyColor,
+					opacity: 1
+				}, time*23);
+				
+					ptDec = 1;
+					var ptd_interval3 = setInterval(function() {
+						llbIndicator.toFront();
+						lhbIndicator.toFront();
+					if ( ptb > 20) {
+						if(ptb== 25){
+							llbrStrip.toFront();
+//							offBtn.toFront();
+						}
+						if(ptb == 80){
+							lhbgStrip.toFront();
+						}
+						ptb = ptb - ptDec;
+//						cntbLbl.attr('text', Math.round(ptb));
+//						cntbLbl.toFront();
 					}else{
 //						toastr.info("Tank empty");
 						clearInterval(ptd_interval3);
 					}
 				}, time/3.5);
 			};
+			
 			
 			function tank_fillt(x, y) {
 //				dataArrUp = [];
@@ -580,10 +665,44 @@ function animateFlowSensor(){
 							lhtrStrip.toFront();
 						}
 						ptt = ptt + intFact;
-						cnttLbl.attr('text', Math.round(ptt));
-						cnttLbl.toFront();
+//						cnttLbl.attr('text', Math.round(ptt));
+//						cnttLbl.toFront();
 					} else {
-						clearInterval(pinterval);toastr.info("Tank filled. Wait for a while to drain the tank");
+						clearInterval(pinterval);
+						toastr.info("Tank filled. Wait for a while to drain the tank");
+						setTimeout(function() { emptyTopTankToBottom(x, y);}, 5000);
+					}
+				}, time/4);
+			};
+			
+			
+			function tank_fillRevt(x, y) {
+//				dataArrUp = [];
+				var b = paper.path('M' + (x) + ' ' + (y) + 'l 0 0').attr({ 'stroke': color, 'stroke-width': '128' });
+				level = b.animate({
+					path: "M" + (x) + " " + (y) + "  l 0  " + (htt) + "", 'stroke-width': '128', 'stroke': color,
+					opacity: 1
+				}, time * 20);
+
+				intFact = 1;
+				var pinterval = setInterval(function() {
+					lltIndicator.toFront();
+					lhtIndicator.toFront();
+					if (ptt < 100) {
+						if (ptt == 25) {
+							lltgStrip.toFront();
+						}
+						if (ptt == 80) {
+							lhtrStrip.toFront();
+						}
+						ptt = ptt + intFact;
+//						cnttLbl.attr('text', Math.round(ptt));
+//						cnttLbl.toFront();
+					} else {
+						rnOff.toFront();
+						shOn.toFront();
+						clearInterval(pinterval);
+						toastr.info("Tank filled. Wait for a while to drain the tank");
 						setTimeout(function() { emptyTopTankToBottom(x, y);}, 5000);
 					}
 				}, time/4);
@@ -608,15 +727,10 @@ function animateFlowSensor(){
 						if(ptt == 80){
 							lhtgStrip.toFront();
 						}
-						
-//						if(ptt % 5 == 0){
-//							tankWt = tankWt - wt; 
-//							loadcellVal.attr('text', tankWt);
-//						}
-						
+
 						ptt = ptt - ptDec; 
-						cnttLbl.attr('text', Math.round(ptt));
-						cnttLbl.toFront();
+//						cnttLbl.attr('text', Math.round(ptt));
+//						cnttLbl.toFront();
 					}else{
 						clearInterval(ptd_interval2);
 						if(s.length != 0){
@@ -628,8 +742,8 @@ function animateFlowSensor(){
 			};
 			
 			function resetMeterToZero(){
-				rnOff.toFront();
-				shOn.toFront();
+//				rnOff.toFront();
+//				shOn.toFront();
 				pitotVal.attr('text', "0");
 				magneticVal.attr('text', "0");
 				ultrasonicVal.attr('text', "0");
@@ -670,7 +784,12 @@ function animateFlowSensor(){
 //			TODO: start btn
 //			Click event listener for start button 
 		    document.getElementById("startBtn").addEventListener("click", function () {
+				$("#datasheetBtn,#graph").prop("disabled", true);
+				$("#startBtn").prop("disabled", true);
+				expCompleteFlg = false;
 				$("#flowSensorNextLvlBtn").prop("disabled", true);
+				
+				tankWt = 0;
 		    	data = {};
 				stOff.toFront();
 				rnOn.toFront();
@@ -709,20 +828,13 @@ function animateFlowSensor(){
 				}, time);
 				
 				tareOn.toFront();
-//			 	toastr.warning('Kuch to gadbad hai');
-//			 	toastr.success("Jalma re");
-//			 	toastr.error("Zala gondhal");
-//			 	toastr.info("Tuza mahiti sathi");
-				
-				
-				
 			});
 		
 			
 			function evaluate(v, ve, max, min){
 				v = v + 275; 
 				ve = diff = Math.random() * (max - min) + min;
-				perv = (v/100)*ve;
+				perv = (275/100)*ve;
 				randomSign = Math.random() < 0.5 ? -1 : 1;
 				perv = randomSign * perv;
 				return v + perv;
@@ -737,7 +849,7 @@ function animateFlowSensor(){
 				let vmax = 2;
 					
 				let omin = 0;
-				let omax = 4;
+				let omax = 2.5;
 					
 				let pmin = 0;
 				let pmax = 1;
@@ -779,6 +891,115 @@ function animateFlowSensor(){
 						round.pv = pv.toFixed(2);
 						round.uv = uv.toFixed(2);
 						round.ov = ov.toFixed(2);
+						
+						if(runMode == "m1"){
+							cvVal.attr('text', "100 %");
+							$("#cvVal1").text("100");
+							motorVal.attr('text', cnt+" %");
+							$("#motorVal1").text(cnt);
+							round.contv = "100";
+							round.motor = cnt;
+						}else if(runMode == "cv"){
+							motorVal.attr('text', "100 %");
+							$("#motorVal1").text("100");
+							cvVal.attr('text', cnt+" %");
+							$("#cvVal1").text(cnt);
+							round.contv = cnt;
+							round.motor = "100";
+						}
+						
+						dataArrUp.push(round);
+						
+						setTimeout(() => {
+						orificeVal.attr('text', ov.toFixed(2));
+							setTimeout(() => {
+								venturiVal.attr('text', vv.toFixed(2));
+								setTimeout(() => {
+									pitotVal.attr('text', pv.toFixed(2));
+									setTimeout(() => {
+										magneticVal.attr('text', mv.toFixed(2));
+										setTimeout(() => {
+											ultrasonicVal.attr('text', uv.toFixed(2));
+											setTimeout(() => {
+												turbineVal.attr('text', tv.toFixed(2));
+												setTimeout(() => {
+													tankWt = tankWt + wt;											
+													loadcellVal.attr('text', tankWt);
+													$("#lcWtVal1").text(tankWt);
+													dataArrUpwt.push(tankWt);
+												}, time);
+											}, time/4);
+										}, time/4);
+									}, time/4);
+								}, time);
+							}, time/4);
+							
+						}, time/4);
+					}, i*(time*1.2)); 
+				}
+			}
+			
+			function evaluateRev(v, ve, max, min){
+				v = v - 275; 
+				ve = diff = Math.random() * (max - min) + min;
+				perv = (275/100)*ve;
+				randomSign = Math.random() < 0.5 ? -1 : 1;
+				perv = randomSign * perv;
+				return v + perv;
+			}
+			
+			function valueIteratorRev(){
+				tankWt = 0;
+				var pv = 5499.90, mv = 5505.02, uv = 5497.84, vv = 5504.60, ov = 5491.76, tv = 5500;
+				var pve = 0, mve = 0, uve = 0, vve = 0, ove = 0;
+				
+				let vmin = 0.25;
+				let vmax = 2;
+					
+				let omin = 0;
+				let omax = 2.5;
+					
+				let pmin = 0;
+				let pmax = 1;
+					
+				let umin = 0;
+				let umax = 2;
+					
+				let mmin = 0;
+				let mmax = 0.5;
+				let cnt = 100;
+				
+				flaag = false;
+//				dataArrUp = [];
+//				dataArrUpwt = [];
+				
+				for(i = 0 ; i < 20 ; i++){
+					
+					 setTimeout(() => {
+						 round = {};
+						 
+						round.tv = tv.toFixed(2);
+						round.vv = vv.toFixed(2);
+						round.mv = mv.toFixed(2);
+						round.pv = pv.toFixed(2);
+						round.uv = uv.toFixed(2);
+						round.ov = ov.toFixed(2);
+						 
+						cnt = cnt - 5; 
+						tv = tv - 275;
+						
+						vv = evaluateRev(vv, vve, vmax, vmin);				
+						pv = evaluateRev(pv, pve, pmax, pmin);				
+						mv = evaluateRev(mv, mve, mmax, mmin);				 
+						uv = evaluateRev(uv, uve, umax, umin);				 
+						ov = evaluateRev(ov, ove, omax, omin);
+						
+						$("#turbineVal1").text(tv.toFixed(2));
+						$("#venturiVal1").text(vv.toFixed(2));
+						$("#eleMagneticVal1").text(mv.toFixed(2));
+						$("#pitotVal1").text(pv.toFixed(2));
+						$("#ultrasonicVal1").text(uv.toFixed(2));
+						$("#orificeVal1").text(ov.toFixed(2));
 						
 						if(runMode == "m1"){
 							cvVal.attr('text', "100 %");
