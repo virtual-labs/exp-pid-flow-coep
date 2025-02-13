@@ -218,7 +218,7 @@ function animateFlowSensor(){
 			}
 
 		paper.clear();
-		var time = 1500;
+		var time = 1000;
 		var htb = -110;
 		var htb1 = 110;
 		var htt = -110;
