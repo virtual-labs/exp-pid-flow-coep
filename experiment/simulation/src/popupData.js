@@ -67,10 +67,62 @@
 			$("#procedure").click(function () {
 				 $("#modelDialog").removeClass("modal-xl");
 				 $("#modelDialog").addClass("modal-md");
-				$("#modalTitle").html("PROCEDURE");
 				htm=''
 					+' '
 				$("#proStrBody").html(htm);
 			});
 				
-	
+	$("#tagDetail1").click(function () {
+		
+		var htm=''
+			+'  <table class="table table-hover table-bordered">'
+			+'    <thead>'
+			+' <tr class="table-info">'
+			+'  <th>Tags</th>'
+			+'  <th>Tag Details</th>'
+			+' </tr>'
+			+' </thead>'
+			+' <tbody>'
+		
+			+' <tr>'
+			+'  <td>MTR</td>'
+			+' <td> Motor </td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>CV</td>'
+			+' <td>Control Valve </td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>FE</td>'
+			+' <td>Orifice Meter</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>FE</td>'
+			+' <td>Venturi Meter</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>PIT</td>'
+			+' <td>Pitot Tube</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>FQI / FIC</td>'
+			+' <td>Electromagnetic Flow Meter</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>FQI / FIC</td>'
+			+' <td>Ultrasonic Flow Meter</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>FQI / FIC</td>'
+			+' <td>Turbine Flow Meter</td>'
+			+'  </tr>'
+			+' <tr>'
+			+'  <td>WT</td>'
+			+' <td>Load Cell</td>'
+			+'  </tr>'
+			
+			
+			+' </tbody>'
+			+'  </table>'
+		$("#tagBody").html(htm);
+	});
