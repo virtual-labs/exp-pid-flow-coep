@@ -357,3 +357,11 @@ background-color: #343a40;
     margin-bottom:5px;
 
 }
+
+.timerStyle{
+	       background-color: #42494f;
+    color: #e8ac6e;
+    font-weight: 700;
+    font-family: 'digital-clock-font';
+    letter-spacing: 1px;
+}

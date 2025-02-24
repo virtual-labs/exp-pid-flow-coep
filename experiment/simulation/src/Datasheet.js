@@ -1,5 +1,5 @@
 function Datasheet(){
-
+console.log(dataArr);
 	var htm=''
 	 +' <div class="row">'
 

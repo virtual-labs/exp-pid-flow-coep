@@ -1,7 +1,15 @@
+var startCount=0;
+var datasheetCount=0;
+var trendsCount=0;
+
 var selectedValue;
 var dataArr = [];
 function flowSensorMimic(){
 	
+			timerMasterJson.squences=$("#counter").text();
+//	console.log(timerMasterJson);
+	seconds = 0;
+	  updateCounter();
 	
 	$("#Header").html("	<center><span >SIMULATION</span></center>");
 	$("#diagram").html("");
@@ -27,7 +35,7 @@ function flowSensorMimic(){
 	+'</div>'
 		+'<div class="row">'
 		+'<div class="col-sm-6">'
-		+'<button id="fillTankBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#myModal1" disabled>Fill Tank</button>'
+		+'<button id="fillTankBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#myModal1">Fill Tank</button>'
 		+'</div>'
 		+'<div class="col-sm-6">'
 		+'<button id="startBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" disabled>Start</button>'
@@ -37,6 +45,9 @@ function flowSensorMimic(){
 		+'<div class="col-sm-6">'
 		+'<button id="datasheetBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#datasheetModel" disabled>View Datasheet</button>'
 		+'</div>'
+//		+'<div class="col-sm-4">'
+//		+'<button id="demo1" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#datasheetModel" disabled>Demo graph</button>'
+//		+'</div>'
 		+'<div class="col-sm-6">'
 		+'<button type="button" class="btn btn-danger"  id="graph" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#modalTrends1" disabled>Trends </button>'
 		+'</div>'
@@ -97,7 +108,7 @@ function flowSensorMimic(){
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="btnResult" style="margin-top:10px;width:100%" disabled>Result</button>'
+		+'<button type="button" class="btn btn-danger"  id="btnResult" style="margin-bottom:50px;width:100%">Result</button>'
 		+'</div>'
 		
 		+'<div class="modal fade " id="datasheetModel">'
@@ -163,21 +174,84 @@ function flowSensorMimic(){
 	 animateFlowSensor();
 	
 	$("#btnResult").click(function(){
-		
-//		flowSensorPostQuestion();
-		
+		resultJson.animationStart=startCount;
+		resultJson.datasheet=datasheetCount;
+		resultJson.trends=trendsCount;
+//		console.log(resultJson);
+		result();
 	});
+	
 	$("#graph").click(function(){
-		console.log("graph call");
-		graphTabs();
+		trendsCount++;
+		$("#trends1").empty("");
+		var htm=''
 		
+	for(var i=0;i<dataArr.length;i++){
+		htm+='<div class="Container-fluid">'
+//		htm+='<h4>Test Cycle - '+(i+1)
+			var rowStr='RowDiv'+(i+1)
+		  htm+="<div class='row' id='"+rowStr+"'>"
+			
+			var GraphData='sensorGraphCold'+i;
+		    htm+="<div class='col-sm-12' id="+GraphData+">"
+			+'</div>'	
+		 
+		//For Hot Readings
+		
+			var GraphData='sensorGraphHot'+i;
+			htm+="<div class='col-sm-12' id="+GraphData+">"
+			+'</div>'
+			+'<div class="col-sm-12">'
+			+'<button id="GraphDataButton'+(i+1)+'" class="btn btn-danger" style="margin-bottom:10px;float:right;" hidden>Download test Cycle report - '+(i+1)+'</button>'
+			+'</div>'
+			+'</div>'
+			htm+='</div>'
+		$("#trends1").append(htm);
+			flowSensorGraph(dataArr[i].sensor,i);
+//		tempratureSensorGraphHot(dataArr[i],i);
+		 var count=parseInt(i+1);
+			$('#GraphDataButton'+count).on('click', function() {
+				console.log("Clickiuyrotigjdfoigj");
+//				$('#saveAsJpg').prop("hidden",true);
+				
+			    html2canvas(document.querySelector('#RowDiv'+count)).then(canvas => {
+			        // Append the screenshot canvas to the body
+			        document.body.appendChild(canvas);
+			        $("canvas").css("display","none");
+			        // Optionally save the screenshot as an image
+			        var link = document.createElement('a');
+			        link.download = 'Density_report.png';
+			        link.href = canvas.toDataURL();
+			        link.click();
+			    });
+			});
+	}	
+	
+		 
+//	$(document).ready(function () {
+//        $('#GraphDataButton'+(i+1)).on('click', function () {
+//        	console.log("Clickiuyrotigjdfoigj");
+//            html2canvas(document.querySelector('#RowDiv'+count)).then(canvas => {
+//                var imgData = canvas.toDataURL("image/png");
+//                $('#screenshotImg').attr('src', imgData);
+//                $('#downloadBtn').show().off('click').on('click', function() {
+//                    var a = document.createElement('a');
+//                    a.href = imgData;
+//                    a.download = 'screenshot.png';
+//                    a.click();
+//                });
+//            });
+//        });
+//    });
+		    
 	});
 	
 	$("#datasheetBtn").on("click", function(){
+		datasheetCount++;
 		Datasheet();
 	});
+	
 	$('#download').on('click', function() {
-		
 //		$('#saveAsJpg').prop("hidden",true);
 	    html2canvas(document.querySelector("#bodyTrends")).then(canvas => {
 	        // Append the screenshot canvas to the body
@@ -536,7 +610,7 @@ function animateFlowSensor(){
 							shOff.toFront();
 							$("#startBtn").prop("disabled", false);
 							$("#flowSensorNextLvlBtn").prop("disabled", false);
-							$("#datasheetBtn,#graph").prop("disabled", false);
+							$("#datasheetBtn,#graph,#BtnResult").prop("disabled", false);
 						}
 						
 						startReverseAnimationForMaxToMinFlow(expCompleteFlg);
@@ -784,7 +858,8 @@ function animateFlowSensor(){
 //			TODO: start btn
 //			Click event listener for start button 
 		    document.getElementById("startBtn").addEventListener("click", function () {
-				$("#datasheetBtn,#graph").prop("disabled", true);
+				startCount++;
+				$("#datasheetBtn,#graph,#BtnResult").prop("disabled", true);
 				$("#startBtn").prop("disabled", true);
 				expCompleteFlg = false;
 				$("#flowSensorNextLvlBtn").prop("disabled", true);
