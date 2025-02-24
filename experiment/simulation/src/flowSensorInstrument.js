@@ -25,6 +25,12 @@ function flowSensorInstrument()
 	var ip;
 	var wt;
 	
+		var instrActualCount=0;
+	timerMasterJson.piping=$("#counter").text();
+//	console.log(timerMasterJson);
+	seconds = 0;
+	  updateCounter();
+	
 	$("#Header").html("	<center><span >  FLOW SENSOR - INSTRUMENT DIAGRAM</span></center>");
 	$("#Selection").css({"overflow": "auto","height":" 837px"});
 	htm=''
@@ -97,10 +103,10 @@ function flowSensorInstrument()
 	$("#Selection").html(htm);
 	
        var temp=0;
-	 var totalComp1=0;
+	 var totalComp1=0; 
 	   var flag=0;
 	$("#verifyInstr").click(function(){
-		
+		instrActualCount++;
 		 fm=parseInt($("#fm").val());
 		 vplc=parseInt($("#vplc").val());
 		 afr=parseInt($("#afr").val());
@@ -261,6 +267,8 @@ function flowSensorInstrument()
 				
 		InstrMasterJson.Instrument=tempMasterJsonInstr;
 		console.log(InstrMasterJson);
+		resultJson.instrument=instrActualCount;
+		console.log(resultJson);
 	}
 	$("#nextLevel2").click(function(){
 		if(flag==1){

@@ -1,121 +1,75 @@
-function graphTabs() {
-  // HTML for the graph container and tabs
-  var htm = ''
-    + '<ul class="nav nav-tabs" id="dynamicTabs1" role="tablist"></ul>'
-    + '<div class="tab-content" id="dynamicTabContent1"></div>';
 
-  // Insert the HTML into the target container
-  $("#trends1").html(htm);
+function flowSensorGraph(sensorData1, i) {
+    // Ensure we have a valid sensorData1 object
 
-  // Ensure dataArr exists and has content
-  if (!Array.isArray(dataArr) || dataArr.length === 0) {
-    console.error("dataArr is empty or not defined.");
-    $("#bodyTrends").append("<p class='text-danger'>No data available to display.</p>");
-    return;
-  }
+    let sensorData = JSON.parse(JSON.stringify(sensorData1));
+    console.log(sensorData); // Check the data before proceeding
 
-  // Clear existing tabs and content
-  $('#dynamicTabs1').empty();
-  $('#dynamicTabContent1').empty();
+    // Ensure tt7 is not empty or undefined
+    const categories = sensorData.map(data => data.tv);
+    console.log(categories); // Check categories before using them
 
-  // Iterate through dataArr to create tabs and graphs
-  for (let i = 0; i < dataArr.length; i++) {
-    // Add a tab for each cycle
-    const activeClass = i === 0 ? 'active' : ''; // Activate the first tab
-    const tabItem = `
-      <li class="nav-item" role="presentation">
-        <button class="nav-link ${activeClass}" id="tab-${i}" data-bs-toggle="tab" data-bs-target="#content-${i}" type="button" role="tab" aria-controls="content-${i}" aria-selected="${i === 0}">
-          Test cycle - ${i + 1}
-        </button>
-      </li>`;
-    $('#dynamicTabs1').append(tabItem);
+    // Extracting other tt values as separate arrays
+    const tt1Data = sensorData.map(data => parseFloat(data.tv));
+    const tt2Data = sensorData.map(data => parseFloat(data.vv));
+    const tt3Data = sensorData.map(data => parseFloat(data.mv));
+    const tt4Data = sensorData.map(data => parseFloat(data.pv));
+    const tt5Data = sensorData.map(data => parseFloat(data.uv));
+    const tt6Data = sensorData.map(data => parseFloat(data.ov));
 
-    // Generate arrays for Highcharts
-    let tvArray = [];
-    let vvArray = [];
-    let mvArray = [];
-    let pvArray = [];
-    let uvArray = [];
-    let ovArray = [];
+    // Check the extracted data arrays
+    console.log(tt1Data); // tt1 values
+    console.log(tt2Data); // tt2 values
+    console.log(tt3Data); // tt3 values
+    console.log(tt4Data); // tt4 values
+    console.log(tt5Data); // tt5 values
+    console.log(tt6Data); // tt5 values
 
-    // Check if the current item has a "sensor" array
-    if (!Array.isArray(dataArr[i].sensor) || dataArr[i].sensor.length === 0) {
-      console.error(`No sensor data for cycle ${i + 1}`);
-      continue;
-    }
 
-    // Populate arrays with sensor data
-    dataArr[i].sensor.forEach(item => {
-      tvArray.push(parseFloat(item.tv)); // Convert strings to numbers
-      vvArray.push(parseFloat(item.vv));
-      mvArray.push(parseFloat(item.mv));
-      pvArray.push(parseFloat(item.pv));
-      uvArray.push(parseFloat(item.uv));
-      ovArray.push(parseFloat(item.ov));
-    });
-
-    // Add content for the tab
-    const tabContent = `
-      <div class="tab-pane fade ${activeClass ? 'show active' : ''}" id="content-${i}" role="tabpanel" aria-labelledby="tab-${i}">
-        <div id="chart-${i}" style="width:100%; height:400px;"></div>
-      </div>`;
-    $('#dynamicTabContent1').append(tabContent);
-
-    // Initialize the Highcharts graph for each tab
-    Highcharts.chart(`chart-${i}`, {
-      chart: {
-        type: 'line',
-        backgroundColor: '#f4f4f4'
-      },
-      exporting: { enabled: false },
-      credits: { enabled: false },
-      title: {
-        text: `Flow Sensor Data - Test Cycle ${i + 1}`
-      },
-      xAxis: {
-        categories: tvArray,
+    // Dynamically create the div ID for the graph
+    const graphDiv = 'sensorGraphCold' + i;
+    var TestCycleCount=parseInt(i+1);
+    
+    const chart = Highcharts.chart(graphDiv, {
+    	credits: { enabled: false},
+        chart: {
+            type: 'line',
+            backgroundColor: '#f4f4f4'
+        },
         title: {
-          text: 'Standard Readings (tv)'
-        }
-      },
-      yAxis: {
-        title: {
-          text: 'Observation Readings'
-        }
-      },
-      tooltip: {
-        shared: true,
-        crosshairs: true
-      },
-      series: [
-        { name: 'Venturi Meter', data: vvArray, color: '#FF6384' },
-        { name: 'Electromagnetic Flow Meter', data: mvArray, color: '#36A2EB' },
-        { name: 'Pitot Tube', data: pvArray, color: '#CC65FE' },
-        { name: 'Ultrasonic Flow Meter', data: uvArray, color: '#FFCE56' },
-        { name: 'Orifice Valve', data: ovArray, color: '#4BC0C0' },
-        { name: 'Turbine Flow Meter', data: tvArray, color: '#000080' }
-      ]
-    });
-  }
-
-  // Add functionality to generate a PDF
-  document.getElementById('generatePdf').addEventListener('click', function () {
-    const { jsPDF } = window.jspdf; // Access jsPDF library
-    const doc = new jsPDF();
-
-    const tables = document.querySelectorAll('#dynamicTabContent1 .table'); // Select all tables
-    tables.forEach((table, index) => {
-      if (index > 0) {
-        doc.addPage(); // Add a new page for each table after the first
-      }
-      doc.autoTable({
-        html: table, // Generate PDF table from HTML table
-        theme: 'grid', // Optional: Table styling (striped, grid, plain)
-        startY: 10, // Starting Y position
-        margin: { top: 10, bottom: 10 }, // Optional margins
-      });
+            text: 'UP READINGS TEST CYCLE - '+(i+1)
+        },
+        xAxis: {
+            categories: categories,
+            title: {
+                text: 'TV'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Values'
+            }
+        },
+        tooltip: {
+            shared: true,
+            crosshairs: true
+        },
+        series: [
+            { name: 'tv', data: tt1Data, color: '#FF6384' },
+            { name: 'vv', data: tt2Data, color: '#36A2EB' },
+            { name: 'mv', data: tt3Data, color: '#CC65FE' },
+            { name: 'pv', data: tt4Data, color: '#FFCE56' },
+            { name: 'uv', data: tt5Data, color: '#4BC0C0' },
+            { name: 'ov', data: tt6Data, color: '#4BC0C0' },
+        ]
     });
 
-    doc.save('Level_sensor_test_cycles.pdf'); // Download the generated PDF
-  });
+    // Handle checkbox toggle for series visibility
+    $('.toggle-series').on('change', function () {
+        const seriesIndex = $(this).data('series');
+        const isVisible = $(this).is(':checked');
+        chart.series[seriesIndex].setVisible(isVisible, false); // Toggle visibility
+        chart.redraw(); // Redraw chart for better performance
+    });
 }
+
