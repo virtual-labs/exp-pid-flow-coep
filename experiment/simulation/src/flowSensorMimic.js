@@ -66,40 +66,40 @@ function flowSensorMimic(){
 		+'</thead>'
 		+'<tbody>'
 		+' <tr>'
-		+'   <td><label><b>Motor :</b></label></td>'
+		+'   <td><label><b>MTR :</b></label></td>'
 		+'   <td><label class="PMCValue" id="motorVal1">0</label>%</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Control Valve :</b></label></td>'
+		+' <td><label><b>CV :</b></label></td>'
 		+' <td><label class="PMCValue" id="cvVal1">0</label>%</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Orifice Meter :</b></label></td>'
+		+' <td><label><b>FE1 :</b></label></td>'
 		+' <td><label class="PMCValue" id="orificeVal1">0</label>lph</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Venturi Meter : </b></label></td>'
+		+' <td><label><b>FE2 : </b></label></td>'
 		+' <td><label class="PMCValue" id="venturiVal1">0</label>lph</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Pitot Tube :  </b></label></td>'
+		+' <td><label><b>FE3 :  </b></label></td>'
 		+' <td><label class="PMCValue" id="pitotVal1">0</label>lph</td>'
 		+'  </tr>'
 		
 		+'  <tr>'
-		+' <td><label><b>Electromagnetic Flow Meter :</b></label></td>'
+		+' <td><label><b>FT1 :</b></label></td>'
 		+' <td><label class="PMCValue" id="eleMagneticVal1">0</label>lph</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Ultrasonic Flow Meter :</b></label></td>'
+		+' <td><label><b>FT2 :</b></label></td>'
 		+' <td><label class="PMCValue" id="ultrasonicVal1">0</label>lph</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Turbine Flow Meter :</b></label></td>'
+		+' <td><label><b>FT3 :</b></label></td>'
 		+' <td><label class="PMCValue" id="turbineVal1">0</label>lph</td>'
 		+'  </tr>'
 		+'  <tr>'
-		+' <td><label><b>Load Cell (WT) :</b></label></td>'
+		+' <td><label><b>WT :</b></label></td>'
 		+' <td><label class="PMCValue" id="lcWtVal1">240</label>Kg</td>'
 		+'  </tr>'
 		+'</tbody>'
@@ -108,7 +108,7 @@ function flowSensorMimic(){
 		+'</div>'
 		
 		+'<div class="col-sm-12">'
-		+'<button type="button" class="btn btn-danger"  id="btnResult" style="margin-bottom:50px;width:100%">Result</button>'
+		+'<button type="button" class="btn btn-danger"  id="btnResult" style="margin-bottom:50px;width:100%" disabled>Result</button>'
 		+'</div>'
 		
 		+'<div class="modal fade " id="datasheetModel">'
@@ -199,32 +199,17 @@ function flowSensorMimic(){
 		//For Hot Readings
 		
 			var GraphData='sensorGraphHot'+i;
+			var downloadGraphBtn='graphBtn'+i;
 			htm+="<div class='col-sm-12' id="+GraphData+">"
 			+'</div>'
-			+'<div class="col-sm-12">'
-			+'<button id="GraphDataButton'+(i+1)+'" class="btn btn-danger" style="margin-bottom:10px;float:right;" hidden>Download test Cycle report - '+(i+1)+'</button>'
+			+"<div class='col-sm-12' id="+downloadGraphBtn+">"
 			+'</div>'
 			+'</div>'
 			htm+='</div>'
 		$("#trends1").append(htm);
 			flowSensorGraph(dataArr[i].sensor,i);
 //		tempratureSensorGraphHot(dataArr[i],i);
-		 var count=parseInt(i+1);
-			$('#GraphDataButton'+count).on('click', function() {
-				console.log("Clickiuyrotigjdfoigj");
-//				$('#saveAsJpg').prop("hidden",true);
-				
-			    html2canvas(document.querySelector('#RowDiv'+count)).then(canvas => {
-			        // Append the screenshot canvas to the body
-			        document.body.appendChild(canvas);
-			        $("canvas").css("display","none");
-			        // Optionally save the screenshot as an image
-			        var link = document.createElement('a');
-			        link.download = 'Density_report.png';
-			        link.href = canvas.toDataURL();
-			        link.click();
-			    });
-			});
+		
 	}	
 	
 		 
@@ -436,21 +421,21 @@ function animateFlowSensor(){
 		//	
 			var turbine = paper.image("images/magnetic.png", (x + 330), (y - 60), 100, 120);
 			
-			paper.text((x+200), (y+425), "Venturi Meter").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+200), (y+425), "FE2").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+405), (y+485), "Orifice Meter").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+405), (y+485), "FE1").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+595), (y+485), "Control Valve").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+595), (y+485), "CV").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+830), (y+500), "Motor").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+830), (y+500), "MTR").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+175), (y+65), "Pitot Tube").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+175), (y+65), "FE3").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+375), (y+65), "Electromagnetic Flow Meter").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+375), (y+65), "FT1").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+610), (y+65), "Ultrasonic Flow Meter").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+610), (y+65), "FT2").attr({'font-size':15,'font-weight':'bold'});
 			
-			paper.text((x+815), (y+65), "Turbine Flow Meter").attr({'font-size':15,'font-weight':'bold'});
+			paper.text((x+815), (y+65), "FT3").attr({'font-size':15,'font-weight':'bold'});
 			
 			function rectTextBoxes(x,y){
 				paper.rect((x+130),(y+85),90,28,7).attr({"fill":"#000","stroke":"#9d9d9e","stroke-width":5});
