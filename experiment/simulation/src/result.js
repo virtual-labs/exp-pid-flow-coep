@@ -3,6 +3,7 @@ function result(){
 	console.log(timerMasterJson);
 	
 	$("#simDemo,#procedure,#counter,#tagDetail1").prop("hidden",true);
+	$("#report").prop("hidden",false);
 	$("#Header").html("<center><span >FLOW SENSOR</span></center>");
 	
 	htm=''
