@@ -20,7 +20,7 @@ function flowSensorMimic(){
 		+'</div>'
 	+'<div class="row">'
 	 +' <div class="panel">'
-	 +' <h5>Run Mode</h5>'
+	 +' <h5>Select Run Mode</h5>'
 	 +' <div class="form-check form-check-inline">'
 	 +'   <input class="form-check-input" type="radio" name="Mode" id="runModeCV" value="cv">'
 	 +'   <label class="form-check-label radio-label" for="twoMinutes">Control Valve</label>'
@@ -35,7 +35,7 @@ function flowSensorMimic(){
 	+'</div>'
 		+'<div class="row">'
 		+'<div class="col-sm-6">'
-		+'<button id="fillTankBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#myModal1">Fill Tank</button>'
+		+'<button id="fillTankBtn" class="btn btn-danger" disabled style="width:100%;margin-bottom:10px" data-toggle="modal" data-target="#myModal1">Fill Tank</button>'
 		+'</div>'
 		+'<div class="col-sm-6">'
 		+'<button id="startBtn" class="btn btn-danger" style="width:100%;margin-bottom:10px" disabled>Start</button>'
@@ -827,7 +827,7 @@ function animateFlowSensor(){
 //			TODO: fill tank button
 //		    click event listener for fill tank button
 		    document.getElementById("fillTankBtn").addEventListener("click", function () {
-		    	$("#runModeM1,#unModeCV").prop("disabled", true);
+		    	$("#runModeM1,#runModeCV").prop("disabled", true);
 					stOn.toFront();
 					tank_fillb((x+1005),(y+570));
 					$("#fillTankBtn").prop("disabled", true);
