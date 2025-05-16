@@ -1,14 +1,29 @@
 function result(){
+	
+	const now = new Date();
+      const formatted = now.toLocaleString();
 	timerMasterJson.mimic=$("#counter").text();
-	console.log(timerMasterJson);
+	//console.log(timerMasterJson);
 	
 	$("#simDemo,#procedure,#counter,#tagDetail1").prop("hidden",true);
 	$("#report").prop("hidden",false);
-	$("#Header").html("<center><span >FLOW SENSOR</span></center>");
+	$("#Header").prop("hidden", true);
+	//$("#Header").html("<center><span >FLOW SENSOR</span></center>");
 	
 	htm=''
+	+'<div class="row" id="divMis" style="background-color: #2e3539; padding: 10px; display: flex; justify-content: center;">'
+  +'<div style="display: flex; align-items: center; gap: 10px; white-space: nowrap;">'
+    +'<span style="color: white;font-weight: bold;">Enter Name.:</span>'
+    +'<input type="text" id="nameInput" style="color: #000; padding: 5px; max-width: 200px;">'
+     
++'<label id="dateTime1" style="color:#fff;">'+formatted+'</label>'
+
+  +'</div>'
++'</div>'
+
+
 	+'<div class="container-fluid">'
-	  
+	  +' <div class="row titlePart" id="" ><center><span >FLOW SENSOR</span></center></div>' 
 	+' <!-- Title -->'
 
 //	+'  <h3 class="text-center heading">Spray Drying Pilot Plant</h3>'
@@ -410,6 +425,45 @@ function result(){
 	          
 	        ]
 	    }]
+	});
+$("#report").click(function() {
+		tmp = $("#nameInput").val();
+		if(tmp != ""){
+			
+			  // Restore value from localStorage when page loads
+			  const savedName = localStorage.getItem("username");
+			  if (savedName) {
+			    $('#nameInput').val(savedName);
+			  }
+ 
+			  // Save input on change
+			  $('#nameInput').on('input', function() {
+			    localStorage.setItem("username", $(this).val());
+			  });
+		 
+			const button = document.getElementById("report");
+			button.hidden = true;
+ 
+			html2canvas(document.querySelector("#mainDiv"), {
+				useCORS: true,
+				allowTaint: false,
+				backgroundColor: null
+			}).then(canvas => {
+				let link = document.createElement('a');
+				link.download = 'Flow.png';
+				link.href = canvas.toDataURL("image/png");
+				link.click();
+//				$("#btnNext").prop("hidden", false);
+			}).catch(err => {
+				console.error("Screenshot failed:", err);
+			}).finally(() => {
+				button.hidden = true;
+			});
+			$("#divMis").prop("hidden",true);
+			
+			}else{
+				alert("Enter Name");
+			}
 	});
 
 }

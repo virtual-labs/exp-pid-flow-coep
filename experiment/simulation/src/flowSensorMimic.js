@@ -269,15 +269,15 @@ function animateFlowSensor(){
 				width = $(this).width();
 				paper = new Raphael(document.getElementById('diagram'), '100%', '100%');
 				paper.setViewBox(0, 0, w, h, true);
-				paper.setSize('90%', '100%');
+		paper.setSize('90%', '110%');
 			} else {
 				paper = new Raphael(document.getElementById('diagram'), '100%', '100%');
 				paper.setViewBox(0, 0, w, h, true);
-				paper.setSize('90%', '100%');
+		paper.setSize('90%', '110%');
 			}
 
 		paper.clear();
-		var time = 1000;
+	var time = 5;
 		var htb = -110;
 		var htb1 = 110;
 		var htt = -110;
@@ -1054,6 +1054,11 @@ function animateFlowSensor(){
 						uv = evaluateRev(uv, uve, umax, umin);				 
 						ov = evaluateRev(ov, ove, omax, omin);
 						
+				if (vv < 0) { vv = 0 };
+				if (pv < 0) { pv = 0 };
+				if (mv < 0) { mv = 0 };
+				if (uv < 0) { uv = 0 };
+				if (ov < 0) { ov = 0 };
 						$("#turbineVal1").text(tv.toFixed(2));
 						$("#venturiVal1").text(vv.toFixed(2));
 						$("#eleMagneticVal1").text(mv.toFixed(2));
