@@ -1,0 +1,79 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "In your opinion why all the customer requirements associated with flow sensor calibration lab could not be satisfied?",
+      "answers": {
+         "a": "Poor Engineering of the project",
+        "b": "Lack of understanding of the requirements",
+        "c": "Scope is unclear",
+        "d": "Available infrastructure is inadequate"
+		
+      },
+      
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Is the dynamic simulation of the flow sensor setup matches with the fullest extent of customer requirements?",
+      "answers": {
+        "a": "Yes",
+        "b": "No"
+     
+      },
+     
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which component of the flow calibration setup will consume maximum energy?",
+      "answers": {
+        "a": "Pump",
+        "b": "Control system",
+        "c": "Field Instruments",
+        "d": "None from the list"
+      },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+	{
+      "question": "Which method will be useful for reducing the energy consumption of the flow calibration facility?",
+      "answers": {
+        "a": "By reducing the number of cycles of the experiments",
+        "b": "By maximizing the number of  sensors to be calibrated simultaneously",
+        "c": "By re-designing the entire calibration facility",
+        "d": "None listed"
+      },
+     
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "Which part of the flow calibration facility is wrongly designed",
+      "answers": {
+        "a": "Start-up sequence",
+        "b": "Running sequence",
+        "c": "Shut down sequence",
+        "d": "Not listed"
+      },
+     
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "As a standard practice how much settling time we should configure for storing  the readings to PLC for this set-up?",
+      "answers": {
+        "a": "Depends on plant lay-out",
+        "b": "Depends on settling time of sensor",
+        "c": "Greater than the settling time of sensor but minimum equal to settling time of process",
+        "d": "The scan time of PLC"
+      },
+     
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    }  
+  ]
+}

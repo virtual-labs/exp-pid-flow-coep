@@ -1,0 +1,115 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the definition of calibration",
+      "answers": {
+         "a": "Calibration is the process of configuring an instrument to provide a result for a sample within an acceptable range.",
+        "b": "Calibration is configuring and verifying a measuring instrument's accuracy to ensure its readings match a known standard",
+        "c": "Calibration means comparing with standard device and adjusting it for accuracy within the limit",
+        "d": "All"
+      },
+      
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is traceability?",
+      "answers": {
+        "a": "Traceability is the ability to identify and follow something or someone, or to keep track of information",
+        "b": "Traceability in calibration is the ability to link the readings of a measuring instrument to a known reference standard.",
+        "c": "Traceability means knowing and documenting the reference instrument used for calibration of device under test",
+        "d": "All"
+      },
+     
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What should be the standard operating region of the sensors used in any industry?",
+      "answers": {
+        "a": "20% to 80%",
+        "b": "30% to 70%",
+        "c": "0% to 100%",
+        "d": "10% to 90%"
+      },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+	{
+      "question": "On what basis the flow sensors are selected for specific application in an industry?",
+      "answers": {
+        "a": "Range of the sensor",
+        "b": "Accuracy and Linearity in the operating region",
+        "c": "Cost of the sensor",
+        "d": "All"
+      },
+     
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "In which stage of the project the design strategy is freezed?",
+      "answers": {
+        "a": "At the time of proposal",
+        "b": "At the time of Erection stage",
+        "c": "At the time of Commissioning stage",
+        "d": "At the time of detailed engineering"
+      },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "For calibration of flow sensor in your opinion which sensor will be the best as 'Standard' sensor?",
+      "answers": {
+        "a": "Ultrasonic",
+        "b": "Magnetic flow meter",
+        "c": "Turbine type flow meter",
+        "d": "Orifice plate DPT type flow meter"
+      },
+     
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "What safety feature needs to be included in this set-up so as to avoid any accident? ",
+      "answers": {
+        "a": "Necessary interlocks",
+        "b": "Emergency STOP push button",
+        "c": "Redundancy at PLC level",
+        "d": "'Fail Safe' operation for all components"
+      },
+     
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "Will there be any effect of installation of flow sensor in the pipe line as regards to accuracy of the readings?",
+      "answers": {
+        "a": "Yes",
+        "b": "No"
+       
+      },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+	
+	{
+      "question": "Will there be any change in flow calibration set-up as regards to application for which it will be used?",
+      "answers": {
+        "a": "Yes",
+        "b": "No"
+      },
+     
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    }  
+  ]
+}

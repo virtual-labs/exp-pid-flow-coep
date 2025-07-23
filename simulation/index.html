@@ -1,0 +1,199 @@
+
+<html>
+<head>
+<title>Flow Sensor</title>
+
+</head>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href= "https://code.jquery.com/ui/1.13.0/themes/dark-hive/jquery-ui.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity= "sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"> 
+ </script>
+ 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/question.css">
+<link rel="stylesheet" href="css/toastr.min.css">
+<link rel="stylesheet" href="css/pageStyle.css">
+<link rel="stylesheet" href="css/flowsensor.css">
+<link rel="stylesheet" href="css/result.css">
+<style>
+
+#coepLogo,#vlabLogo{
+ pointer-events: none;
+}
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('font/digital-7.ttf');
+}
+
+</style>
+
+<body >
+<header>
+		<img class="COEPLogo" src='images/COEPlogo.png' id="coepLogo" disabled>
+		<img class="VlabLogo" src='images/vlablogo.jpg' id="vlabLogo" disabled>
+	    <span id="colgName">COEP TECHNOLOGICAL UNIVERSITY PUNE</span>	
+			
+	</header>
+	<div class="row container-fluid " id="landingPage">
+	<div  class="col-sm-12 " > 
+	</div>
+	</div>
+	<div  class="row container-fluid" id="buttonDiv" >	
+<!-- 		<div  class="col-sm-12" >  -->
+<!-- 		 <h5 id="counter" class=" btn1 timerStyle">00:00:00</h5> -->
+<!-- 			<button type="button" id="saveAsJpg" class="btn btn-danger btn1" data-dismiss="modal" data-target="#problemstr"><b>Problem statement</b></button>	 -->
+<!-- 	        <button type="button" id="simDemo" class="btn btn-danger btn1" data-toggle="modal" data-target="#proStr"><b>Problem statement</b> </button> -->
+<!-- <!-- 		    <button type="button" id="btnForModal" class="btn btn-danger btn1 button1" data-toggle="modal" data-target="#myModal1"><b>Procedure </b></button> -->
+<!-- 	     </div> -->
+	     <div  class="col-sm-12" > 
+		 <h5 id="counter" class=" btn1 timerStyle">00:00:00</h5>
+<!-- 			<button type="button" id="saveAsJpg" class="btn btn-danger btn1" data-dismiss="modal" data-target="#problemstr"><b>Problem statement</b></button>	 -->
+            <button type="button" id="tagDetail1" class="btn btn-danger btn1" data-toggle="modal" data-target="#tagDetail"><b>Tag details</b></button>
+	        <button type="button" id="simDemo" class="btn btn-danger btn1" data-toggle="modal" data-target="#proStr"><b>Problem statement</b> </button>
+		    <button type="button" id="procedure" class="btn btn-danger btn1 button1" data-toggle="modal" data-target="#proStr"><b>Procedure </b></button>
+            <button type="button" class="btn btn-danger btn1 button1"  id="report" style="margin-top:10px;"  hidden>Download report </button> 
+	
+	     </div>
+	     
+	   
+			  
+<!-- 			    The Modal  ProStr -->
+		  <div class="modal fade " id="ProStr">
+		    <div class="modal-dialog modal-xl" >
+			      <div class="modal-content">
+<!-- 		        Modal Header -->
+			        <div class="modal-header">
+		          <h4 class="modal-title"><center id="modalTitle"></center></h4>
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+<!-- 		        Modal body -->
+			        <div class="modal-body" id="proStrBody">
+		
+			        </div>
+<!-- 			        Modal footer -->
+			        <div class="modal-footer">
+<!-- 		             <button type="button" class="btn btn-danger" data-dismiss="modal" >Ok</button> -->
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+<!-- 			  End Modal ProStr -->
+
+<!-- 			  End Modal ProStr -->
+	   	     <!-- 			    The Modal  ProStr -->
+		  <div class="modal fade " id="tagDetail">
+		    <div class="modal-dialog modal-md" >
+			      <div class="modal-content">
+<!-- 		        Modal Header -->
+			        <div class="modal-header">
+		          <h4 class="modal-title"><center id="modalTitle"></center></h4>
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+<!-- 		        Modal body -->
+			        <div class="modal-body" id="tagBody">
+		
+			        </div>
+<!-- 			        Modal footer -->
+			        <div class="modal-footer">
+<!-- 		             <button type="button" class="btn btn-danger" data-dismiss="modal" >Ok</button> -->
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+<!-- 			  End Modal ProStr -->  
+	     
+ 	</div>
+ 	 
+    <div class="row titlePart" id="Header" ></div>
+
+	     <div class="container-fluid" style="margin-top:10px; " id="mainDiv" >
+	 		 <div class="row">
+	  			  <div class="col-sm-3" id="Selection" style=" border-style: double;">
+			      	</div>
+			    	<div class="col-sm-9" id="diagram" style=" border-style: double;margin-bottom: 18px;">
+					<!--      <img src="images/dryer12.png" class="img-fluid" style="margin-top:10px;"> -->
+			    	</div>
+	  	 </div>
+	</div>
+<footer>
+Copyrights &copy; COEPTECH - Virtual Labs
+</footer>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
+<!-- <script src="src/landingPage.js"></script> -->
+<script src="src/popupData.js"></script>
+<script src="src/stdJson.js"></script>
+<script src="src/questionJson.js"></script>
+
+<!-- sensor 1- Flow sensor  -->
+<script src="src/flowSensorPiping.js"></script>
+<script src="src/flowSensorInstrument.js"></script>
+<script src="src/flowSensorPreQuestion.js"></script>
+<script src="src/flowSensorMimic.js"></script>
+<script src="src/flowSensorGraph.js"></script>
+<script src="src/graph1.js"></script>
+<script src="src/Datasheet.js"></script>
+<script src="src/timer.js"></script>
+<script src="src/result.js"></script>
+<script type="text/javascript" src="js/toastr.min.js"></script>
+
+<script>
+$( document ).ready(function() {
+	flowSensorPiping();
+//	flowSensorMimic();
+});
+</script>
+<script> 
+     toastr.options = {
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': false,
+        'progressBar': false,
+        'positionClass': 'toast-bottom-right',
+        'preventDuplicates': false,
+        'showDuration': '1000',
+        'hideDuration': '1000',
+        'timeOut': '5000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut',
+        'margin-bottom':'50%'
+    }
+    
+     
+</script>
+<script>
+$("#coepLogo").click(function(evt) {
+	
+	 $('#coepLogo').off('click');
+});
+
+
+</script>
+</html>
