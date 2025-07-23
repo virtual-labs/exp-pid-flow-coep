@@ -28,17 +28,17 @@
     {
       "question": "What should be the standard operating region of the sensors used in any industry?",
       "answers": {
-        "a": "20% to 80 %",
-        "b": "30 % to 70%",
-        "c": "0 % to 100 %",
-        "d": "10% to 90 %"
+        "a": "20% to 80%",
+        "b": "30% to 70%",
+        "c": "0% to 100%",
+        "d": "10% to 90%"
       },
      
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
 	{
-      "question": "On what basis the sensors are selected for specific application in an industry?",
+      "question": "On what basis the flow sensors are selected for specific application in an industry?",
       "answers": {
         "a": "Range of the sensor",
         "b": "Accuracy and Linearity in the operating region",
@@ -64,19 +64,6 @@
     },
 	
 	{
-      "question": "As a standard practice how much settling time we should configure for storing  the readings to PLC for this set-up?",
-      "answers": {
-        "a": "Depends on plant lay-out",
-        "b": "Depends on settling time of sensor",
-        "c": "Greater than the settling time of sensor but minimum equal to settling time of process",
-        "d": "The scan time of PLC"
-      },
-     
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    },
-	
-	{
       "question": "For calibration of flow sensor in your opinion which sensor will be the best as 'Standard' sensor?",
       "answers": {
         "a": "Ultrasonic",
@@ -90,7 +77,7 @@
     },
 	
 	{
-      "question": "What safety feature needs to be included in this set-up  so as to avoid any accident? ",
+      "question": "What safety feature needs to be included in this set-up so as to avoid any accident? ",
       "answers": {
         "a": "Necessary interlocks",
         "b": "Emergency STOP push button",
@@ -115,7 +102,7 @@
     },
 	
 	{
-      "question": "Will there be any change in calibration set-up as regards to application for which it will be used?",
+      "question": "Will there be any change in flow calibration set-up as regards to application for which it will be used?",
       "answers": {
         "a": "Yes",
         "b": "No"
@@ -123,13 +110,6 @@
      
       "correctAnswer": "a",
       "difficulty": "beginner"
-    }
-  
-  
-  
-  
-  
-  
-  
+    }  
   ]
 }
