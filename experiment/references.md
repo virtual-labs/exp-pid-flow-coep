@@ -25,7 +25,6 @@
 #### Online Resources:
 
 -	Omega Engineering. (n.d.). Flow Sensors: Calibration and Troubleshooting. Retrieved from https://www.omega.com/flow-sensors-calibration-troubleshooting
--	Instrumentation, Systems, and Automation Society (ISA). (n.d.). Calibration of Flow Sensors. Retrieved from https://www.isa.org/standards-and-publications/isa-publications/calibration-of-flow-sensors/
 
 #### Thesis and Dissertations:
 
